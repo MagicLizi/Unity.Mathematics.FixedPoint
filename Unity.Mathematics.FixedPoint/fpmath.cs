@@ -629,7 +629,11 @@ namespace Unity.Mathematics.FixedPoint {
         /// </summary>
         static public fp2 normalizesafe (fp2 x, fp2 defaultvalue = new fp2 ()) {
             fp len = fpmath.dot (x, x);
-            return fpmath.select (defaultvalue, x * fpmath.rsqrt (len), len > 0.00000001m);
+            if (len > 0.00000001m) {
+                return x * fpmath.rsqrt (len);
+            } else {
+                return defaultvalue;
+            }
         }
 
         /// <summary>
@@ -638,7 +642,12 @@ namespace Unity.Mathematics.FixedPoint {
         /// </summary>
         static public fp3 normalizesafe (fp3 x, fp3 defaultvalue = new fp3 ()) {
             fp len = fpmath.dot (x, x);
-            return fpmath.select (defaultvalue, x * fpmath.rsqrt (len), len > 0.00000001m);
+
+            if (len > 0.00000001m) {
+                return x * fpmath.rsqrt (len);
+            } else {
+                return defaultvalue;
+            }
         }
 
         /// <summary>
